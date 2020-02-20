@@ -1,7 +1,7 @@
 class Polynomial:
     def __init__(self, coeffs):
         if not coeffs:
-            coeffs = []
+            coeffs = [0]
         self.coeffs = coeffs
     def derivative(self):
         deriv_coeffs = [i * self.coeffs[i] for i in range(1, len(self.coeffs), 1)]
@@ -11,6 +11,10 @@ class Polynomial:
         for power, coeff in enumerate(self.coeffs):
             res += coeff * (val**power)
         return res
+    def __repr__(self):
+        str_repr = ["{}x^{}".format(coeff, i) if i != 0 else "{}".format(coeff) for \
+            i, coeff in enumerate(self.coeffs)]
+        return " + ".join(str_repr)
 
 def poly_solver(poly, modulus):
     res = []
