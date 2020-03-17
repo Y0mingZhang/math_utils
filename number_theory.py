@@ -55,10 +55,13 @@ def sieve_of_eratosthenes(n):
 def primes(n):
     return sieve_of_eratosthenes(n)
 
-def root_of_unity(n, p):
-    if n >= 1:
-        poly = Polynomial([-1] + [0] * (n-1) + [1])
-    else:
-        poly = Polynomial([0])
-    return poly_solver(poly, p)
+def order(n, modulus):
+    return min([i for i in range(1, modulus) if (n ** i) % modulus == 1])
 
+def print_orders(modulus):
+    print('n\tord(n)')
+    for i in range(1, modulus):
+        print('{}\t{}'.format(i, order(i, modulus)))
+
+def primitive_roots(modulus):
+    return [i for i in range(1, modulus) if order(i, modulus) == modulus-1]
