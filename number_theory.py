@@ -13,7 +13,7 @@ class Polynomial:
         return res
     def __repr__(self):
         str_repr = ["{}x^{}".format(coeff, i) if i != 0 else "{}".format(coeff) for \
-            i, coeff in enumerate(self.coeffs)]
+            i, coeff in enumerate(self.coeffs) if coeff != 0]
         return " + ".join(str_repr)
 
 def poly_solver(poly, modulus):
@@ -62,6 +62,12 @@ def print_orders(modulus):
     print('n\tord(n)')
     for i in range(1, modulus):
         print('{}\t{}'.format(i, order(i, modulus)))
+
+def print_prim_root_powers(prim_root, modulus):
+    print("i\t{}^i".format(prim_root))
+    for i in range(1, modulus):
+        print('{}\t{}'.format(i, prim_root**i % modulus))
+    
 
 def primitive_roots(modulus):
     return [i for i in range(1, modulus) if order(i, modulus) == modulus-1]
